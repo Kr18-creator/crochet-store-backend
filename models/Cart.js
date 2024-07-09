@@ -13,7 +13,10 @@ const cartSchema = new mongoose.Schema(
         name: { type: String, required: false },
       },
     ],
-  }
+  },
+  
+  { collection: "cart" } ,// Specify the collection name explicitly
+  {timestamps: true}
 );
 
 const Cart = mongoose.model("Cart", cartSchema);
