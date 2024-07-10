@@ -27,10 +27,10 @@ mongoose
 
 // Add a product
 app.post("/product/add", async (req, res) => {
-  const { name, price } = req.body;
+  const { name, price, image, description } = req.body;
 
   try {
-    const product = new Product({ name, price });
+    const product = new Product({ name, price, image, description });
     await product.save();
     res.status(201).json({ message: "Product added", product });
   } catch (err) {
@@ -59,11 +59,19 @@ app.post("/cart/add", async (req, res) => {
       (item) => item.productId.toString() === productId
     );
     if (existingProductIndex !== -1) {
-      return res.status(200).json({ message: "Product already in cart updating the count" });
+      return res
+        .status(200)
+        .json({ message: "Product already in cart updating the count" });
     }
 
     // Add the product to the cart
-    cart.products.push({ productId: product._id, name: product.name });
+    cart.products.push({
+      productId: product._id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+    });
 
     // Save the cart
     await cart.save();
@@ -132,7 +140,13 @@ app.get("/cart/all", async (req, res) => {
     const productDetailsPromises = cart.products.map(async (item) => {
       const product = await Product.findById(item.productId);
       return product
-        ? { productId: product._id, name: product.name, price: product.price }
+        ? {
+            productId: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            description: product.description,
+          }
         : null;
     });
 
