@@ -169,7 +169,7 @@ app.get("/cart/all", async (req, res) => {
 });
 
 // Get all products
-app.get("/product/all", async (req, res) => {
+app.get("/products/all", async (req, res) => {
   try {
     const products = await Product.find();
     res.status(200).json({ products });
