@@ -10,13 +10,16 @@ const cartSchema = new mongoose.Schema(
           ref: "Product",
           required: true,
         },
-        name: { type: String, required: false },
+        name: { type: String, required: true },
+        description: { type: String, required: true },
+        price: { type: Number, required: true },
+        image: { type: String, required: true },
       },
     ],
   },
-  
-  { collection: "cart" } ,// Specify the collection name explicitly
-  {timestamps: true}
+
+  { collection: "cart" }, // Specify the collection name explicitly
+  { timestamps: true }
 );
 
 const Cart = mongoose.model("Cart", cartSchema);
