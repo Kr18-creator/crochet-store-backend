@@ -128,7 +128,7 @@ app.delete("/cart/delete", async (req, res) => {
 });
 
 // Get all products in the cart
-app.get("/cart/all", async (req, res) => {
+app.get("/cart", async (req, res) => {
   try {
     // Find the cart
     const cart = await Cart.findOne();
@@ -169,7 +169,7 @@ app.get("/cart/all", async (req, res) => {
 });
 
 // Get all products
-app.get("/products/all", async (req, res) => {
+app.get("/products", async (req, res) => {
   try {
     const products = await Product.find();
     res.status(200).json({ products });
