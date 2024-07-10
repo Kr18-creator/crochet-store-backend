@@ -58,9 +58,8 @@ app.post("/cart/add", async (req, res) => {
     const existingProductIndex = cart.products.findIndex(
       (item) => item.productId.toString() === productId
     );
-
     if (existingProductIndex !== -1) {
-      return res.status(400).json({ error: "Product already in cart" });
+      return res.status(200).json({ message: "Product already in cart updating the count" });
     }
 
     // Add the product to the cart
